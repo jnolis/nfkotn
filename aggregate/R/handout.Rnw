@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{multicol}
+
+\pagestyle{empty}
+\begin{document}
+\begin{multicols}{2}
+<<results="asis",echo=FALSE>>=
+for(i in 1:config$num_cards){
+  cat("\\noindent \\textbf{Nerd Feud with King of the Nerds!}\\\\ Help us come up with answers for the questions we'll ask.\\\\ See the game on Sunday at 5:35 in 601\\\\ \\textbf{Go to ",config$url," and use the login code: ",ids[i],"}\\\\ \\vspace{0.27in}\\\\ \n ")
+  if(i %% 18 == 0){
+    if(i %% 5 == 0){
+      #cat("\\vfill % \n \\columnbreak \n")
+    } else {
+      #cat("\\vfill % \n \\newpage \n")
+    }
+  }
+}
+@
+\end{multicols}
+\end{document}

@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=2in]{geometry}
+
+
+\pagestyle{empty}
+\begin{document}
+
+Warning! Spoilers ahead!
+\newpage
+<<echo=FALSE>>=
+latex_str <- function (x) 
+{
+    split <- strsplit(x, "")
+    replacements <- c(`\\` = "{\\textbackslash}", `$` = "\\$", 
+        `_` = "\\_", `^` = "\\^{}", `#` = "\\#", `}` = "\\}", 
+        `{` = "\\{", `%` = "\\%", `&` = "\\&", `~` = "{\\textasciitilde}")
+    new_string <- x
+    if (length(split) > 0) {
+        for (j in 1:length(split)) {
+            is_changed <- logical(length = length(split[[j]]))
+            for (i in 1:length(replacements)) {
+                change <- split[[j]] == names(replacements)[i] & 
+                  !is_changed
+                split[[j]][change] <- replacements[i]
+                is_changed[change] <- TRUE
+            }
+            new_string[j] <- paste0(split[[j]], collapse = "")
+        }
+        return(new_string)
+    }
+    else return("")
+}
+
+
+@
+
+<<results="asis",echo=FALSE>>=
+for(i in 1:length(questions)){
+  cat("\\section{",latex_str(questions[i]),"}\n",sep="")
+  answers <- sapply(results,function(x) x$value[[i]])
+  answers <- answers[answers != ""]
+  if(length(answers) > 0){
+    answer_idx <- sample.int(n = length(answers),size = min(length(answers),150))
+    for(j in 1:length(answer_idx)){
+      cat(j," - ",latex_str(answers[answer_idx[j]]),"\\\\\n",sep="")
+    }
+  }
+}
+
+@
+\end{document}

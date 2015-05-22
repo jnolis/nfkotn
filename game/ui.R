@@ -1,0 +1,9 @@
+library(shiny)
+library(shinydashboard)
+dashboardPage(
+  dashboardHeader(disable=TRUE),
+  dashboardSidebar(disable=TRUE),
+  dashboardBody(
+    uiOutput("scores"),
+    fluidRow(column(uiOutput("board"),width=10),column(uiOutput("controls"),width=2)))
+)
