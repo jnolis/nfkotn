@@ -105,7 +105,7 @@ shinyServer(function(input, output,session) {
           h4("You have answered all of the questions, thanks for helping!") 
         } else {
           label <- questions[user_answers$question_order[user_answers$current_question]]
-          list(textInput("answer",label=label,value="")) #,em("(To skip leave the answer blank)"))
+          list(textInput("answer",label=label,value=""),em("(If you don't have an answer write \"SKIP\")"))
         }
       }
     })

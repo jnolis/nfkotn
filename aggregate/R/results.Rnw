@@ -40,8 +40,8 @@ latex_str <- function (x)
 <<results="asis",echo=FALSE>>=
 for(i in 1:length(questions)){
   cat("\\section{",latex_str(questions[i]),"}\n",sep="")
-  answers <- sapply(results,function(x) x$value[[i]])
-  answers <- answers[answers != ""]
+  answers <- sapply(results,function(x) toupper(x$value[[i]]))
+  answers <- answers[!is.element(answers,c("SKIP", ""))]
   if(length(answers) > 0){
     answer_idx <- sample.int(n = length(answers),size = min(length(answers),150))
     for(j in 1:length(answer_idx)){
