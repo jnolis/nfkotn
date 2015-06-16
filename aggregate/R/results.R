@@ -1,4 +1,5 @@
 require(knitr)
+
 require(dplyr)
 result_files <- list.files("aggregate/data/user_info")
 results <- list()
