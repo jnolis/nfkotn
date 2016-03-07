@@ -1,9 +1,4 @@
 .Rproj.user
 .Rhistory
 .RData
-*.rdp
 *.rds
-*.yaml
-*.pdf
-*.tex
-*.csv
